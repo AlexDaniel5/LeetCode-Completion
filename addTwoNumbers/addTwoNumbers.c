@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 //Define structs outside of main
 struct ListNode {
@@ -10,66 +9,69 @@ struct ListNode {
 
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2);
 void printAll(struct ListNode* head);
-unsigned int sumVals(struct ListNode* head);
-unsigned int power (unsigned int base, int exponent);
-struct ListNode* convertNumToLinkedList(int *num, int* size);
-int* numToArray(unsigned int num, int *size);
+//Take the pointer of the linked list so modifications can occur
 void freeLinkedList(struct ListNode** head);
 
 int main() {
     struct ListNode* l1 = malloc(sizeof(struct ListNode));
     struct ListNode* l2 = malloc (sizeof(struct ListNode));
-    l1->val = 1;
+    l1->val = 2;
     l1->next = malloc(sizeof(struct ListNode));
-    l1->next->val = 9;
+    l1->next->val = 4;
     l1->next->next = malloc(sizeof(struct ListNode));
-    l1->next->next->val = 9;
-    l1->next->next->next = malloc(sizeof(struct ListNode));
-    l1->next->next->next->val = 9;
-    l1->next->next->next->next = malloc(sizeof(struct ListNode));
-    l1->next->next->next->next->val = 9;
-    l1->next->next->next->next->next = malloc(sizeof(struct ListNode));
-    l1->next->next->next->next->next->val = 9;
-    l1->next->next->next->next->next->next = malloc(sizeof(struct ListNode));
-    l1->next->next->next->next->next->next->val = 9;
-    l1->next->next->next->next->next->next->next = malloc(sizeof(struct ListNode));
-    l1->next->next->next->next->next->next->next->val = 9;
-    l1->next->next->next->next->next->next->next->next = malloc(sizeof(struct ListNode));
-    l1->next->next->next->next->next->next->next->next->val = 9;
-    l1->next->next->next->next->next->next->next->next->next = malloc(sizeof(struct ListNode));
-    l1->next->next->next->next->next->next->next->next->next->val = 9;
+    l1->next->next->val = 3;
     //Valgrind will complain about uninitalized values without this line
-    l1->next->next->next->next->next->next->next->next->next->next = NULL;   
-    l2->val = 9;
-    //l2->next = malloc(sizeof(struct ListNode));
-    // l2->next->val = 6;
-    // l2->next->next = malloc(sizeof(struct ListNode));
-    // l2->next->next->val = 4;
-    // l2->next->next->next = malloc(sizeof(struct ListNode));
-    // l2->next->next->next->val = 9;
-    l2->next = NULL;   
-    //Take the pointer of the linked list so modifications can occur
+    l1->next->next->next = NULL;   
+    l2->val = 5;
+    l2->next = malloc(sizeof(struct ListNode));
+    l2->next->val = 6;
+    l2->next->next = malloc(sizeof(struct ListNode));
+    l2->next->next->val = 4;
+    l2->next->next->next = NULL;   
     struct ListNode* result = addTwoNumbers(l1, l2);
+    printAll(result);
     freeLinkedList(&result);
-    //printAll(l1);
     return 0;
 }
 
 struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2) {
-    int *listNum, *size = malloc(sizeof(int));
-    unsigned int num1 = 0, num2 = 0, sum = 0;
-    struct ListNode* linkedListSum;
-    num1 = sumVals(l1);
-    num2 = sumVals(l2);
-    printf("\n%f %f\n", num1, num2);
-    sum = num1 + num2;
-    listNum = numToArray(sum, size);
-    linkedListSum = convertNumToLinkedList(listNum, size);
+    struct ListNode* ptr1 = l1;
+    struct ListNode* ptr2 = l2;
+    struct ListNode* sumNode = malloc(sizeof(struct ListNode));
+    struct ListNode* headSum = sumNode;
+    int sum = 0, carry = 0;
+    while(ptr1 != NULL || ptr2 != NULL || carry != 0) {
+        //Reset/initialize values;
+        sumNode->val = carry;
+        sum = 0, carry = 0;
+        //If the node isn't empty add it to the sum node
+        if (ptr1 != NULL) {
+            sum += ptr1->val;
+            ptr1 = ptr1->next;
+        }
+        if (ptr2 != NULL) {
+            sum += ptr2->val;
+            ptr2 = ptr2->next;
+        }
+        sumNode->val += sum;
+        //If the number is more than one digit, increment carry
+        if (sumNode->val > 9) {
+            carry = 1;
+            sumNode->val -= 10;
+        }
+        //If we're looping again allocate space for the next node
+        if (ptr1 != NULL || ptr2 != NULL || carry != 0) {
+            sumNode->next = malloc(sizeof(struct ListNode));
+            sumNode = sumNode->next;
+        }
+    }
+    //Set the last node to NULL to avoid initialization erros
+    sumNode->next = NULL;
+    //Go back to the first node
+    sumNode = headSum;
     freeLinkedList(&l1);
     freeLinkedList(&l2);
-    free(listNum);
-    free(size);
-    return linkedListSum;
+    return sumNode;
 }
 
 void freeLinkedList(struct ListNode** head) {
@@ -81,94 +83,14 @@ void freeLinkedList(struct ListNode** head) {
     }
 }
 
-struct ListNode* convertNumToLinkedList(int* num, int* size) {
-    struct ListNode* head = malloc(sizeof(struct ListNode));
-    struct ListNode* ptr = head;
-    //0 + 0 case
-    if (num == 0) {
-        ptr->val = 0;
-        ptr->next = NULL;
-        return head;
-    }
-    for ( int i = 0; i < *size; i++) {
-        ptr->val = num[i];
-        if (i < *size - 1) {
-            ptr->next = malloc(sizeof(struct ListNode));
-            ptr = ptr->next;
-        }
-    }
-    //Valgrind will complain without an intialized value
-    ptr->next = NULL;
-    return head;
-}
-
-    
-int* numToArray(unsigned int num, int* size) {
-    unsigned int temp = num;
-    int length = 0;
-    int* listNum = malloc(sizeof(int));
-    //Determine length of number
-    while (temp != 0) {
-        temp /=10;
-        length++;
-    }
-    listNum = realloc(listNum, sizeof(int) * length);
-    //Grab the lowest digit and add it to the array one by one
-    for (int i = 0; i < length; i++) {
-        listNum[i] = num % 10;
-        num /= 10;
-    }
-    *size = length;
-    return listNum;
-}
-
-void reverseLinkedList(struct ListNode** head) {
-    struct ListNode* prev = NULL, *ptr = *head, *next = NULL;
-
-    while (ptr != NULL) {
-        //Store next node
-        next = ptr->next;
-        //Place the next node to the previous node
-        ptr->next = prev;
-        //Move to the next nodes
-        prev = ptr;
-        ptr = next;
-    }
-    //Update the head node to the end of the linked list
-    *head = prev;
-}
-
-unsigned int sumVals(struct ListNode* head) {
-    unsigned int multiplier = 0, total = 0;
-    int exp = 0;
-    while(head != NULL) {
-        
-        multiplier = power(10, exp);
-        //Multiplier is for the digit placement
-        total += head->val * multiplier;
-        head = head->next;
-        exp++;
-    }
-    return total;
-}
-
 void printAll(struct ListNode* head) {
     struct ListNode* ptr = head;
     if (head == NULL) {
-        printf("Nothing in the linked list");
+        printf("Nothing in the linked list\n");
         return;
     }
     while (ptr != NULL) {
         printf("%d\n", ptr->val);
         ptr = ptr->next;
     }
-}
-
-//Do a power operation
-unsigned int power (unsigned int base, int exponent) {
-    unsigned int result = 1;
-    for (int i = 0; i < exponent; i++) {
-        result *= base;
-    }
-    return result;
 }
