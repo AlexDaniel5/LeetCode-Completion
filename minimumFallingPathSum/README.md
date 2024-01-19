@@ -6,7 +6,7 @@ To Run:
 
 
 Description:
-Work-in progress Solution
+This code implements a dynamic programming solution to find the minimum falling path sum in a given matrix. It iterates through the matrix in a bottom-up manner, updating each element by adding the minimum falling path sum from the row below. The final result is the minimum value in the first row of the modified matrix, representing the minimum falling path sum through the entire matrix.
 
 LeetCode Description:
 Given an n x n array of integers matrix, return the minimum sum of any falling path through matrix.

@@ -1,21 +1,19 @@
 class Solution(object):
     def minFallingPathSum(self, matrix):
-        rows, cols = len(matrix), len(matrix[0])
-
-        # Initialize the result matrix with dimensions (rows + 1) x (cols + 1)
-        result = [[float("inf")] * (cols + 1) for i in range (rows + 1)]
-        
-        # Set the bottom-right element to 0, representing the base case for the last row
-        result[rows - 1][cols] = 0
-        
-        # Dynamic Programming Loop
-        for i in range (rows - 1, -1, -1):
-            for k in range (cols - 1, -1, -1):
-                # Update the result matrix with the minimum falling path sum
-                result[i][k] = matrix[i][k] + min(result[i + 1][k], result[i][k + 1])
-
-        # Return the minimum falling path sum starting from the top-left corner
-        return result[0][0]
+        n = len(matrix)
+        # Iterate through the matrix in a bottom-up manner 
+        for i in reversed(range(n-1)): 
+            for j in range(n):
+                # Calculate values for the three possible choices in the row below
+                # If the current element is in the leftmost column, set 'left' to a large value to handle the boundary condition
+                left = 9999999 if j == 0 else matrix[i+1][j-1]
+                right = 9999999 if j == n-1 else matrix[i+1][j+1]
+                # Value directly below
+                down = matrix[i+1][j]
+                # Update the current element by adding the minimum of the three choices
+                matrix[i][j] += min(left, down, right)
+        # Return the minimum value in the first row of the modified matrix
+        return min(matrix[0])
     
 # To Test Code
 matrix1 = [[2, 1, 3], [6, 5, 4], [7, 8, 9]]
