@@ -15,7 +15,7 @@ class Solution(object):
         if sign == -1:
             reversed_int *= -1
         # Check if the integer fits within 32 bits
-        if reversed_int < -2**31 or reversed_int > 2**31 -1:
+        if reversed_int < -2147483648 or reversed_int > 2147483647:
             return 0
         return reversed_int
 
