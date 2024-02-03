@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-//Testing commits
+
 double findMedianSortedArrays(int* nums1, int nums1Size, int* nums2, int nums2Size);
 int* bubbleSort(int* arr, int size);
 
