@@ -1,6 +1,6 @@
 ## General Information
 Name: Alex Daniel
-Date: Feburary 5, 2024
+Date: February 5, 2024
 
 ### To Run
 - python groupAnagrams.py
