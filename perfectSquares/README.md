@@ -1,15 +1,15 @@
 ## General Information
 Name: Alex Daniel
-Date: February 8, 2024
+Date: February 9, 2024
 
 ### To Run
 - python perfectSquares.py
 
 ### Results
-Failed Test cases
+Failed Test case 571/588 due to time limit
 
-### Description
-Work in progress
+### Description of Failed Attempt #2
+Uses the idea of a tree in which we solve for every value up to n beforehand. However, fails due to time limit.
 
 ## Description of Failed Attempt
 Calculate all the perfect squares below n. Sum the largest perfect square under n repeatedly while keeping a count until the sum reaches or exceeds n.
