@@ -15,12 +15,9 @@ Remove the negative sign to expedite string manipulation. Convert the integer to
 an integer. Reapply the negative sign if the original integer was negative. Finally, validate if the signed integer falls within its
 32-bit constraint.
 
-
 ### Notes
-Hashable is when an object:
-- Has a numerical value computed based on its contents
-- Can't be changed after creation
-We convert a dictionary into a tuple so we can compare it to other dictionaries in this program.
+- Hashable is when an object has a numerical value computed based on its contents and can't be changed after creation
+- We convert a dictionary into a tuple so we can compare it to other dictionaries in this program.
 
 ### LeetCode Description
 Given an array of strings strs, group the anagrams together. You can return the answer in any order.
