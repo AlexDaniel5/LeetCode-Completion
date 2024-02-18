@@ -16,7 +16,7 @@ the middle. If this condition is met, return the word.
 ## Notes
 - Rounding down during division works perfectly in this scenario, as we don't need to check the character in the middle
 if the number of characters is odd.
-- -i at 0 is 0, so we need to add one, to check the actual last character -1
+- When i is 0, using -i gives 0, so we need to add one to check the actual last character at position -1.
 
 ### LeetCode Description
 Given an array of strings words, return the first palindromic string in the array. If there is no such string, return an empty string "".
