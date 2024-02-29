@@ -10,7 +10,6 @@ class TreeNode(object):
 class Solution(object):
     def findBottomLeftValue(self, root):
         frontier = deque([root])
-        level_values = []
         # While the queue isn't empty continue BFS search
         while frontier:
             node = frontier.popleft()
