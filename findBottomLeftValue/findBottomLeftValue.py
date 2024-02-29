@@ -13,7 +13,6 @@ class Solution(object):
         # While the queue isn't empty continue BFS search
         while frontier:
             node = frontier.popleft()
-            level_values.append(node.val)
             if node.right:
                 frontier.append(node.right)
             if node.left:
