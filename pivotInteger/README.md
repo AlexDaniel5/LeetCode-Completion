@@ -6,11 +6,11 @@ Date: March 13, 2024
 - python pivotInteger.py
 
 ### Results
-Speed: 22 ms and beats 69.93% of users
-Memory: 11.47 MB and beats 96.73% of users
+Speed: 15 ms and beats 84.42% of users
+Memory: 11.62 MB and beats 54.55% of users
 
 ### Description
-First, calculate the total sum of n! and designate it as the right sum. Then, iterate from 1 to n, incrementally adding each number to the left sum. Ensure to subtract the current number from the right sum after verifying if it equals the left sum, as the pivot integer is encompassed by both sums.
+First, calculate the total sum of n and designate it as the right sum. Then, iterate from 1 to n, incrementally adding each number to the left sum. Ensure to subtract the current number from the right sum after verifying if it equals the left sum, as the pivot integer is encompassed by both sums.
 
 ### LeetCode Description
 Given a positive integer n, find the pivot integer x such that:

@@ -1,9 +1,7 @@
 class Solution(object):
     def pivotInteger(self, n):
-        rightSum = 0
-        # Find the total sum of n!
-        for i in range(1, n + 1):
-            rightSum += i
+        # Find the total sum of n
+        rightSum = sum(range(n + 1))
         leftSum = 0
         # Increase the pivot integer and decrease the total sum
         for i in range(1, n + 1):
