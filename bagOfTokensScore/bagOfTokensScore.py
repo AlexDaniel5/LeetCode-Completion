@@ -22,3 +22,12 @@ class Solution(object):
 
 print(Solution().bagOfTokensScore([6,0,39,52,45,49,59,68,42,37], 99)) # 5
 print(Solution().bagOfTokensScore([42,10,26,22], 65)) # 3
+
+print("start test")
+import math
+
+x = 10000000000 * 86400
+n = 1
+while math.factorial(n) <= x:
+    n += 1
+print(n)
