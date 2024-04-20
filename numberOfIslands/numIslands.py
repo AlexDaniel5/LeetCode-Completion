@@ -3,7 +3,7 @@ from collections import deque
 class Solution(object):
     def numIslands(self, grid):
         # Converts an island to water using BFS
-        def bfs(grid, startRow, startCol):
+        def bfs(startRow, startCol):
             # Add the initial tile to the queue and convert it to water
             queue = deque([(startRow, startCol)])
             grid[startRow][startCol] = "0"
@@ -29,7 +29,7 @@ class Solution(object):
         for row in range(rows):
             for col in range(cols):
                 if grid[row][col] == "1": 
-                    bfs(grid, row, col)
+                    bfs(row, col)
                     result += 1
         return result
     
