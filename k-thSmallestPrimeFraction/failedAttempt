@@ -1,0 +1,37 @@
+class Solution(object):
+    def kthSmallestPrimeFraction(self, arr, k):
+        n = len(arr)
+        l = 0
+        r = 1
+        p = 0
+        q = 0
+        # Binary search loop
+        while l < r:
+            # Calculate the middle value
+            middle = (l + r) / 2
+            maxFraction = 0
+            count = 0
+            j = 1
+            # Iterate through the array
+            for i in range(n - 1):
+                # Find the position where the fraction is smaller than the middle value
+                while j < n and arr[i] / arr[j] > middle:
+                    j += 1
+                # Update count based on the number of fractions smaller than the middle value
+                if j == n:
+                    break
+                count += n - j
+                # Update maxFraction if a smaller fraction is found
+                if arr[i] / arr[j] > maxFraction:
+                    p = arr[i]
+                    q = arr[j]
+                    maxFraction = p / q
+            # Check if the kth smallest prime fraction is found
+            if count == k:
+                return p, q
+            # Adjust the search space based on count
+            elif count < k:
+                l = middle
+            else:
+                r = middle
+        return p, q
