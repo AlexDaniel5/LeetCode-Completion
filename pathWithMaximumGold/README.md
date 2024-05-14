@@ -23,7 +23,6 @@ Return the maximum amount of gold you can collect under the conditions:
     Never visit a cell with 0 gold.
     You can start and stop collecting gold from any position in the grid that has some gold.
 
-
 ### Topics
 - Array
 - Matrix
