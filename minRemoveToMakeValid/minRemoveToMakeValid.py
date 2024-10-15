@@ -6,7 +6,7 @@ class Solution(object):
             # Append the index of where the front parantheses would be in the result string
             if char == "(":
                 stack.append(len(result))
-            # If we have exisiting front parantheses in the stack pop it's index so it won't get removed in the final string
+            # If we have existing front parantheses in the stack pop it's index so it won't get removed in the final string
             elif char == ")":
                 if stack:
                     stack.pop()

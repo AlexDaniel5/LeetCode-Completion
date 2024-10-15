@@ -1,5 +1,5 @@
 ## General Information
-Name: Alex Daniel
+Name: Alex Daniel<br>
 Date: May 13, 2024
 
 ### To Run
