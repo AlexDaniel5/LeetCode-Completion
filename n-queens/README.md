@@ -1,5 +1,6 @@
 ## General Information
 Name: Alex Daniel
+
 Date: March 31, 2025
 
 ### To Run
@@ -7,6 +8,7 @@ Date: March 31, 2025
 
 ### Results
 Speed: 10 ms and beats 94.94% of users
+
 Memory: 12.52 MB and beats 75.00% of users
 
 ### Description
